@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\product;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -12,7 +13,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+//        $products = product::all();
+        $products = product::with('category')->get();
+        return view('Admin.Product.index',compact('products'));
     }
 
     /**

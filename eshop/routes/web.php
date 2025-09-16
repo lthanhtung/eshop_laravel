@@ -10,9 +10,7 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::get('/admin',function(){
-   return view('admin.index');
-})->name('admin');
+Route::get('/admin',[CategoryController::class,'index'])->name('admin');
 
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('/user', UserController::class);

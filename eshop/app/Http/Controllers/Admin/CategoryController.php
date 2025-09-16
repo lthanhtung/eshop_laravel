@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -12,7 +13,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $category = category::all();
+        return view('Admin.Category.index',['category'=>$category]);
     }
 
     /**
@@ -20,7 +22,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('Admin.Category.create');
     }
 
     /**
@@ -28,7 +30,14 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $messages_create = '';
+        $category = category::create($request->all());
+        if ($category)
+            $messages_create= "Thêm mới danh mục sản phẩm thành công";
+        else
+            $messages_create="Thêm mơi danh mục sản phẩm thất bại";
+        return redirect()->route('admin.category.index')->with('messages_sussess',$messages_create);
+
     }
 
     /**
@@ -36,7 +45,9 @@ class CategoryController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $showCategory = category::findOrFail($id);
+
+        return view('Admin.Category.show',['showCategory'=>$showCategory]);
     }
 
     /**
@@ -44,7 +55,8 @@ class CategoryController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $category = category::findOrFail($id);
+        return view('Admin.Category.edit',['category'=>$category]);
     }
 
     /**
@@ -52,7 +64,14 @@ class CategoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+       $messages_update = '';
+       $category = category::findOrFail($id);
+       $category->update($request->all());
+       if($category)
+           $messages_update='Cập nhập danh mục sản phẩm thành công';
+       else
+           $messages_update ='Cập nhập danh mục sản phẩm thất bại';
+        return redirect()->route('admin.category.index')->with('messages_sussess',$messages_update);
     }
 
     /**
@@ -60,6 +79,12 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $messages_delete = '';
+        if (!category::destroy($id))
+            $messages_delete ='Xóa danh mục sản phẩm không thành công';
+        else
+            $messages_delete ='Xóa danh mục sản phẩm thành công';
+        return redirect()->route('admin.category.index')->with('messages_failed',$messages_delete);
+
     }
 }
