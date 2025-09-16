@@ -19,7 +19,7 @@
 
         <!-- Bordered Table -->
         <div class="card">
-            <h5 class="card-header">Danh sáchsản phẩm</h5>
+            <h5 class="card-header">Danh sách sản phẩm</h5>
             <div class="card-body">
                 <div class="table-responsive text-nowrap">
                     <table class="table table-bordered">
@@ -40,9 +40,15 @@
                                 <td>
                                     <i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>{{$products->name}}</strong>
                                 </td>
-                                <td>{{\Illuminate\Support\Str::limit($products->description,30,'...')}}</td>
+                                <td>{{\Illuminate\Support\Str::limit($products->description,10,'...')}}</td>
                                 <td>{{$products->price}}</td>
-                                <td>{{\Illuminate\Support\Str::limit($products->image,10,'...')}}</td>
+                                <td>
+                                    @if($products->image)
+                                        <img width="100" src="{{asset('uploads/product/'.$products->image)}}">
+                                    @else
+                                        <span class="text-muted">Chưa có ảnh</span>
+                                    @endif
+                                </td>
                                 <td>{{$products->category->name}}</td>
 
                                 <td><span class="badge bg-label-primary me-1">{{$products->created_at->format('d/m/y H:i:s')}}</span></td>
