@@ -5,10 +5,15 @@ use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
+//
+//Route::get('/', function () {
+//    return view('home');
+//});
 
-Route::get('/', function () {
-    return view('home');
-});
+
+Route::get('/',[\App\Http\Controllers\user\UserController::class,'index'])->name('home');
+Route::get('/detail/{detail}',[\App\Http\Controllers\user\UserController::class,'show'])->name('detail');
+
 
 Route::get('/admin',[CategoryController::class,'index'])->name('admin');
 
