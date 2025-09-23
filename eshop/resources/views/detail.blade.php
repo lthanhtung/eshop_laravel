@@ -4,6 +4,14 @@
 @section('title','Product Detail')
 
 @section('content')
+
+    <!-- Back button -->
+    <div class="container mt-3">
+        <a href="{{ url()->previous() }}" class="btn btn-secondary">
+            ← Quay lại
+        </a>
+    </div>
+
 <!-- Product section-->
 <section class="py-2">
     <div class="container px-4 px-lg-5 my-5">
@@ -18,8 +26,8 @@
                 </div>
                 <p class="lead">{{$product->description}}</p>
                 <div class="d-flex">
-                    <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
-                    <button class="btn btn-outline-dark flex-shrink-0" type="button">
+                    <input class=" form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
+                    <button style="margin-left: 10px" class="btn btn-outline-dark flex-shrink-0" type="button">
                         <i class="bi-cart-fill me-1"></i>
                         Add to cart
                     </button>

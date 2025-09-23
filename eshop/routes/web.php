@@ -10,12 +10,11 @@ use Illuminate\Support\Facades\Route;
 //    return view('home');
 //});
 
-
 Route::get('/',[\App\Http\Controllers\user\UserController::class,'index'])->name('home');
 Route::get('/detail/{detail}',[\App\Http\Controllers\user\UserController::class,'show'])->name('detail');
 
-
 Route::get('/admin',[CategoryController::class,'index'])->name('admin');
+
 
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('/user', UserController::class);
